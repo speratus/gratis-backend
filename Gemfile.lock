@@ -1,3 +1,10 @@
+GIT
+  remote: git@github.com:speratus/authorizer.git
+  revision: ebc867d0d368b7ef47ee88bb7bc5150da8ef8885
+  specs:
+    authorizer (0.1.2)
+      rails (~> 6.0.2, >= 6.0.2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -157,6 +164,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  authorizer!
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
