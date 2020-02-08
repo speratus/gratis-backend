@@ -1,13 +1,12 @@
 class UsersController < ApplicationController
     before_action :authenticated?, except: [:create]
-    before_action :get_authorized_user, except: [:create]
+    before_action :get_authorized_user, except: [:create, :index]
 
     def index
-
     end
 
     def show
-
+        render json: @user
     end
 
     def create
@@ -22,17 +21,21 @@ class UsersController < ApplicationController
     end
 
     def update
-
+        if @user.update(user_params)
+            render json: @user
+        else
+            render json: {message: 'There was an error updating the user'}, status: 400
+        end
     end
 
     def delete
-
+        @user.destroy
     end
 
     private
 
     def user_params
-        params.require(:user).permit(:name, :username, :password, :tagline, :email, :bio)
+        params.require(:user).permit(:name, :username, :password, :tagline, :email, :bio, :avatar)
     end
 
     def get_authorized_user

@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    include HostGetter
     has_secure_password
 
     has_one_attached :avatar
@@ -25,4 +26,12 @@ class User < ApplicationRecord
     has_many :comments, dependent: :destroy
     #Checked. Users can access comment likes
     has_many :comment_likes, dependent: :destroy
+
+    check_perm 'users#show', 'users#update', 'users#delete' do |attempted_user, current_user|
+        attempted_user == current_user
+    end
+
+    def get_avatar
+        get_attachment(self.avatar)
+    end
 end
