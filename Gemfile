@@ -28,6 +28,7 @@ gem 'dotenv-rails'
 gem 'jwt'
 gem 'authorizer', git: 'git@github.com:speratus/authorizer.git'
 gem 'faker'
+gem 'active_model_serializers'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
