@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+    before_action :authenticated?, except: [:create]
+
     def index
 
     end
@@ -16,6 +18,6 @@ class UsersController < ApplicationController
     end
 
     def delete
-        
+
     end
 end
