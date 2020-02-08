@@ -9,6 +9,9 @@ User.destroy_all
 Shoutout.destroy_all
 Comment.destroy_all
 Friendship.destroy_all
+CommentLike.destroy_all
+ShoutoutLike.destroy_all
+FriendGroup.destroy_all
 
 puts "Creating users"
 20.times do
@@ -54,3 +57,37 @@ puts "Creating Friendships"
     user.friendships.build(followee: User.all.sample)
     user.save
 end
+puts "Friendships created"
+
+puts "Creating Comment Likes"
+50.times do
+    user = User.all.sample
+    user.comment_likes.build(comment: Comment.all.sample)
+    user.save
+end
+puts "Comment Likes created"
+
+puts "Creating Shoutout Likes"
+50.times do
+    user = User.all.sample
+    user.shoutout_likes.build(shoutout: Shoutout.all.sample)
+    user.save
+end
+puts "Shoutout Likes Created"
+
+puts "Creating Friend Groups"
+15.times do 
+    FriendGroup.create(
+        name: Faker::Hipster.words.join(' '),
+        description: Faker::Hipster.paragraphs(number: 1).join
+    )
+end
+puts "Friend Groups created"
+
+puts "Creating Group Members"
+20.times do 
+    user = User.all.sample
+    user.group_members.build(friend_group: FriendGroup.all.sample)
+    user.save
+end
+puts "Group Members created"

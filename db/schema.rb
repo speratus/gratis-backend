@@ -124,8 +124,8 @@ ActiveRecord::Schema.define(version: 2020_02_07_181009) do
   add_foreign_key "comment_likes", "users"
   add_foreign_key "comments", "shoutouts"
   add_foreign_key "comments", "users"
-  add_foreign_key "friendships", "users", column: "followee_id"
-  add_foreign_key "friendships", "users", column: "follower_id"
+  add_foreign_key "friendships", "users", column: "followee_id", on_delete: :cascade
+  add_foreign_key "friendships", "users", column: "follower_id", on_delete: :cascade
   add_foreign_key "group_members", "friend_groups"
   add_foreign_key "group_members", "users"
   add_foreign_key "mentions", "shoutouts"

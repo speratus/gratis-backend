@@ -3,7 +3,7 @@ class Shoutout < ApplicationRecord
 
   has_many :mentions, dependent: :destroy
 
-  has_many :shoutout_likes
+  has_many :shoutout_likes, dependent: :destroy
 
   has_many :comments, dependent: :destroy
 end
