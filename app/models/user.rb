@@ -4,8 +4,9 @@ class User < ApplicationRecord
     has_one_attached :avatar
     has_one_attached :background
 
+    #Checked. Both friendships and friends are functional
     has_many :friendships, foreign_key: :follower_id
-    has_many :friends, through: :friendships
+    has_many :friends, through: :friendships, source: :followee
 
     #Checked. Users can access mentions
     has_many :mentions, dependent: :destroy
