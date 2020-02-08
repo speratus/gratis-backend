@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    include HostGetter
+    include AttachmentGetter
     has_secure_password
 
     has_one_attached :avatar
@@ -19,7 +19,7 @@ class User < ApplicationRecord
 
     #Checked. Users can access shoutouts
     has_many :shoutouts, dependent: :destroy
-    #Checked. Users cna access shoutout likes
+    #Checked. Users can access shoutout likes
     has_many :shoutout_likes, dependent: :destroy
     
     #Checked. Users can access comments

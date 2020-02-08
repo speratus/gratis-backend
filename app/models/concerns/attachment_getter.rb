@@ -1,4 +1,4 @@
-module HostGetter
+module AttachmentGetter
     extend ActiveSupport::Concern
 
     def base_url
