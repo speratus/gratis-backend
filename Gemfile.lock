@@ -1,8 +1,8 @@
 GIT
   remote: git@github.com:speratus/authorizer.git
-  revision: ebc867d0d368b7ef47ee88bb7bc5150da8ef8885
+  revision: 961bf045cc182427afcf62e85a3e0b8f26400d2c
   specs:
-    authorizer (0.1.2)
+    authorizer (0.2.0)
       rails (~> 6.0.2, >= 6.0.2.1)
 
 GEM
