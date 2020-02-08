@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
     before_action :authenticated?, except: [:create]
+    before_action :get_authorized_user, except: [:create]
 
     def index
 
@@ -32,5 +33,10 @@ class UsersController < ApplicationController
 
     def user_params
         params.require(:user).permit(:name, :username, :password, :tagline, :email, :bio)
+    end
+
+    def get_authorized_user
+        user = User.find_by(id: params[:id])
+        @user = check_authorization(user, current_user)
     end
 end
