@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 
     def delete
         @user.destroy
-
+        
     end
 
     private
@@ -41,8 +41,10 @@ class UsersController < ApplicationController
 
     def get_authorized_user
         user = User.find_by(id: params[:id])
-        puts "++++++++++++ #{current_user}"
-        # byebug
-        @user = check_authorization(user, current_user)
+        if user
+            @user = check_authorization(user, current_user)
+        else
+            render json: {message: 'That user does not exist'}, status: 404
+        end
     end
 end
