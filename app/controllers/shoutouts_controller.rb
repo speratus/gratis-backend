@@ -1,5 +1,5 @@
 class ShoutoutsController < ApplicationController
-  before_action :authenticated?
+  # before_action :authenticated?
   before_action :get_authorized_user, except: [:index, :create]
 
 

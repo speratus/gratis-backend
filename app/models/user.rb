@@ -13,7 +13,7 @@ class User < ApplicationRecord
     has_many :mentions, dependent: :destroy
 
     #Checked. Users can access group_members
-    has_many :group_members
+    has_many :group_members, dependent: :destroy
     #Checked. Users can access groups
     has_many :groups, through: :group_members, source: :friend_group
 

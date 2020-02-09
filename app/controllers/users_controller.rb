@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
-    before_action :authenticated?, except: [:create]
+    # before_action :authenticated?, except: [:create]
     before_action :get_authorized_user, except: [:create, :index]
 
     def index
     end
 
     def show
-        render json: @user
+        render json: UserSerializer.user_show(@user)
     end
 
     def create
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
         if user.save
             token = JWT.encode({'user_id': user.id}, ENV['SECRET'])
-            render json: {token: token, user: user}
+            render json: {token: token, user: UserSerializer.user_show(user)}
         else
             render json: {message: 'There was an error creating the user'}, status: 400
         end
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
     def update
         if @user.update(user_params)
-            render json: @user
+            render json: UserSerializer.user_show(@user)
         else
             render json: {message: 'There was an error updating the user'}, status: 400
         end
@@ -30,6 +30,7 @@ class UsersController < ApplicationController
 
     def delete
         @user.destroy
+
     end
 
     private
@@ -40,6 +41,8 @@ class UsersController < ApplicationController
 
     def get_authorized_user
         user = User.find_by(id: params[:id])
+        puts "++++++++++++ #{current_user}"
+        # byebug
         @user = check_authorization(user, current_user)
     end
 end
