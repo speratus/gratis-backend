@@ -18,6 +18,6 @@ class Shoutout < ApplicationRecord
   end
 
   check_perm 'shoutouts#show' do |shoutout, user|
-    shoutout.visibility == 'public' || shoutout.user.friends.include?(user)
+    shoutout.visibility == 'public' || shoutout.user == user || shoutout.user.friends.include?(user)
   end
 end

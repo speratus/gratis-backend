@@ -1,4 +1,4 @@
-class CommentsSerializer
+class CommentSerializer
 
     def self.shoutout_show(comment)
         {
