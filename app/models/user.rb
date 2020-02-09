@@ -27,6 +27,9 @@ class User < ApplicationRecord
     #Checked. Users can access comment likes
     has_many :comment_likes, dependent: :destroy
 
+    validates :email, :username, :name, :password, presence: true
+    validates :email, :username, uniqueness: true
+
     check_perm 'users#show', 'users#update', 'users#delete' do |attempted_user, current_user|
         attempted_user == current_user
     end
