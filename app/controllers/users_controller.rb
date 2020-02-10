@@ -1,12 +1,17 @@
 class UsersController < ApplicationController
     # before_action :authenticated?, except: [:create]
-    before_action :get_authorized_user, except: [:create, :index]
+    before_action :get_authorized_user, except: [:create, :index, :profile]
 
     def index
     end
 
     def show
         render json: UserSerializer.user_show(@user)
+    end
+
+    def profile
+        check_authorization(User.new, current_user)
+        render json: UserSerializer.user_show(current_user)
     end
 
     def create

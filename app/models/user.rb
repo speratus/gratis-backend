@@ -34,6 +34,10 @@ class User < ApplicationRecord
         attempted_user == current_user
     end
 
+    check_perm 'users#profile' do |nothing, user|
+        !user.nil?
+    end
+
     def get_avatar
         get_attachment(self.avatar)
     end
