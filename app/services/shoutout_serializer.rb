@@ -23,7 +23,8 @@ class ShoutoutSerializer
         {
             id: shoutout.id,
             content: shoutout.content,
-            user: UserSerializer.basic_show(shoutout.user)
+            user: UserSerializer.basic_show(shoutout.user),
+            mentions: shoutout.mentions.map {|m| MentionSerializer.shoutout_show(m)}
         }
     end
 end

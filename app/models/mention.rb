@@ -5,6 +5,6 @@ class Mention < ApplicationRecord
   validates :user, :shoutout, presence: true
 
   def length
-    self.user.username.length
+    self.user.username.length+1
   end
 end

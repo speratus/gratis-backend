@@ -10,7 +10,8 @@ class UserSerializer
             avatar: user.get_avatar,
             shoutouts: user.shoutouts.map {|s| ShoutoutSerializer.user_show(s)},
             mentions: user.mentions.map {|m| MentionSerializer.user_show(m)},
-            groups: user.groups.map {|g| FriendGroupSerializer.basic_show(g)}
+            groups: user.groups.map {|g| FriendGroupSerializer.basic_show(g)},
+            friends: user.friends.map {|f| UserSerializer.basic_show(f)}
         }
     end
 
