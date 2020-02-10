@@ -10,8 +10,8 @@ class UsersController < ApplicationController
     end
 
     def profile
-        check_authorization(User.new, current_user)
-        render json: UserSerializer.user_show(current_user)
+        user = check_authorization(current_user, nil)
+        render json: UserSerializer.user_show(user)
     end
 
     def create
