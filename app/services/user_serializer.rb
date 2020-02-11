@@ -24,6 +24,17 @@ class UserSerializer
             id: user.id,
             name: user.name,
             username: user.username,
+            avatar: user.get_avatar,
+            tagline: user.tagline,
+            bio: user.bio
+        }
+    end
+
+    def self.minimal_show(user)
+        {
+            id: user.id,
+            name: user.name,
+            username: user.username,
             avatar: user.get_avatar
         }
     end
