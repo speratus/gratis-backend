@@ -41,6 +41,8 @@ class Shoutout < ApplicationRecord
 
   def total_length
     mentions_lengths = self.mentions.map {|m| m.length}
+    # puts "++++++++++++++++++#{self.mentions.length}"
+    # puts "==================#{mentions_lengths}"
     mentions_len = mentions_lengths.reduce(:+)
     self.content.length + mentions_len
   end

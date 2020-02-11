@@ -34,7 +34,7 @@ class User < ApplicationRecord
         attempted_user == current_user
     end
 
-    check_perm 'users#profile' do |user, nothing|
+    check_perm 'users#profile', 'users#index' do |user, nothing|
         !user.nil?
     end
 

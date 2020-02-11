@@ -20,11 +20,14 @@ class ShoutoutsController < ApplicationController
 
   def create
     shoutout = check_authorization(Shoutout.new(shoutout_params), current_user)
-
+    # puts "==========#{shoutout_params}"
     if shoutout.save
-      render json: ShoutoutSerializer.shoutout_show(shoutout)
+      render json: ShoutoutSerializer.user_show(shoutout)
     else
-      render json: {message: 'there was an error in creating the shoutout.'}, status: 400
+      render json: {
+          message: 'there was an error in creating the shoutout.',
+          errors: shoutout.errors.full_messages
+        }, status: 400
     end
   end
 
@@ -35,7 +38,7 @@ class ShoutoutsController < ApplicationController
   private
 
   def shoutout_params
-    params.require(:shoutout).permit(:content, :visibility, mentions: [:user_id])
+    params.require(:shoutout).permit(:content, :visibility, :user_id, mentions_attributes: :user_id)
   end
 
   def get_authorized_shoutout

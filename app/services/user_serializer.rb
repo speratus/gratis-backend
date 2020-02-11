@@ -15,6 +15,10 @@ class UserSerializer
         }
     end
 
+    def self.user_basic_show_all(users)
+        users.map {|u| self.basic_show(u)}
+    end
+
     def self.basic_show(user)
         {
             id: user.id,

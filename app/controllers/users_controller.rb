@@ -3,6 +3,9 @@ class UsersController < ApplicationController
     before_action :get_authorized_user, except: [:create, :index, :profile]
 
     def index
+        check_authorization(current_user, nil)
+        users = User.all
+        render json: UserSerializer.user_basic_show_all(users)
     end
 
     def show
