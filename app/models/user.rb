@@ -30,11 +30,11 @@ class User < ApplicationRecord
     validates :email, :username, :name, :password, presence: true
     validates :email, :username, uniqueness: true
 
-    check_perm 'users#show', 'users#update', 'users#delete' do |attempted_user, current_user|
+    check_perm 'users#update', 'users#delete' do |attempted_user, current_user|
         attempted_user == current_user
     end
 
-    check_perm 'users#profile', 'users#index' do |user, nothing|
+    check_perm 'users#profile', 'users#show', 'users#index' do |user, nothing|
         !user.nil?
     end
 
