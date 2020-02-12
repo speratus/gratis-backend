@@ -15,7 +15,7 @@ class Shoutout < ApplicationRecord
   validate :has_at_least_one_mention
 
 
-  check_perm 'shoutouts#update', 'shoutouts#delete' do |shoutout, user|
+  check_perm 'shoutouts#update', 'shoutouts#destroy' do |shoutout, user|
     shoutout.user == user
   end
 

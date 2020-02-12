@@ -12,7 +12,7 @@ class ShoutoutsController < ApplicationController
 
   def update
     if @shoutout.update(shoutout_params)
-      render json: ShoutoutSerializer.shoutout_show(@shoutout)
+      render json: ShoutoutSerializer.mention_show(@shoutout)
     else
       render json: {message: 'Invalid shoutout parameters'}, status: 400
     end
@@ -22,7 +22,7 @@ class ShoutoutsController < ApplicationController
     shoutout = check_authorization(Shoutout.new(shoutout_params), current_user)
     # puts "==========#{shoutout_params}"
     if shoutout.save
-      render json: ShoutoutSerializer.user_show(shoutout)
+      render json: ShoutoutSerializer.mention_show(shoutout)
     else
       render json: {
           message: 'there was an error in creating the shoutout.',
@@ -31,8 +31,9 @@ class ShoutoutsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @shoutout.destroy
+    render json: {message: 'successfully deleted shoutout', shoutout: @shoutout}
   end
 
   private

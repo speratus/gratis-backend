@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       token = JWT.encode({user_id: user.id}, ENV['SECRET'])
       # byebug
-      render json: {:token => token}
+      render json: {:token => token, :user_id => user.id}
     else
       render json: {message: 'Incorrect username or password'}
     end
