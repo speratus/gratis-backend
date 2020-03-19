@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    include AttachmentGetter
     has_secure_password
 
     has_one_attached :avatar
@@ -12,17 +13,32 @@ class User < ApplicationRecord
     has_many :mentions, dependent: :destroy
 
     #Checked. Users can access group_members
-    has_many :group_members
+    has_many :group_members, dependent: :destroy
     #Checked. Users can access groups
     has_many :groups, through: :group_members, source: :friend_group
 
     #Checked. Users can access shoutouts
     has_many :shoutouts, dependent: :destroy
-    #Checked. Users cna access shoutout likes
+    #Checked. Users can access shoutout likes
     has_many :shoutout_likes, dependent: :destroy
     
     #Checked. Users can access comments
     has_many :comments, dependent: :destroy
     #Checked. Users can access comment likes
     has_many :comment_likes, dependent: :destroy
+
+    validates :email, :username, :name, :password, presence: true
+    validates :email, :username, uniqueness: true
+
+    check_perm 'users#update', 'users#delete' do |attempted_user, current_user|
+        attempted_user == current_user
+    end
+
+    check_perm 'users#profile', 'users#show', 'users#index' do |user, nothing|
+        !user.nil?
+    end
+
+    def get_avatar
+        get_attachment(self.avatar)
+    end
 end
